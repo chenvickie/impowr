@@ -1,0 +1,48 @@
+<div class="jobs_table">
+  {{jobs-table
+    reloadTable=reloadTable
+    searchInput=model.searchValue
+    data=jobs
+    totalPages=totalPages
+    pageLength=pageLength
+    allowAdd=allowAdd
+    onAdd=(action "addRecord")
+    onEdit=(action "editRecord")
+    onDelete=(action "deleteRecord")
+  }}
+</div>
+
+{{#if isShowingModal}}
+  {{#modal-dialog targetAttachment="center" translucentOverlay=true}}
+    {{model-dialog-title title="Job Job Editor" onClose=(action "closeModal")}}
+    {{job-form
+      isEdit=isEdit
+      data=editData
+      teams=teams
+      onClose=(action "closeModal")
+    }}
+
+  {{/modal-dialog}}
+{{/if}}
+
+{{#if isShowingDeleteConfirm}}
+  {{#modal-dialog targetAttachment="center" translucentOverlay=true}}
+    <div class="delete-confirm-form">
+      <div class="row">
+        <p>Are you sure you want to delete
+          {{selectedDeleteRecord.job}}
+          from the job job?</p>
+      </div>
+      <div class="row">
+        <button
+          class="btn btn-primary"
+          {{action "deleteEditData"}}
+        >Delete</button>
+        <button
+          class="btn btn-primary"
+          {{action "closeDeleteConfirmDialog"}}
+        >Cancel</button>
+      </div>
+    </div>
+  {{/modal-dialog}}
+{{/if}}

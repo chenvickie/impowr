@@ -1,0 +1,86 @@
+<div class="about_list">
+  <h4>Terminologies</h4>
+  <ul>
+    <li><span><b>Job</b>: a scheduled task that transfers data from a source
+        Redcap project to a destination Redcap project. (All projects must
+        enable RedCap APIs access)
+      </span></li>
+    <li><span><b>Form</b>: a redCap instrument</span></li>
+    <li><span><b>Field</b>: a redCap field</span></li>
+    <li><span><b>Dictionary</b>: a redCap dictionary </span></li>
+  </ul>
+
+  <h4>Data Import - Per Job</h4>
+  <ol>
+    <li><span>Pull all up to date forms and fields from the source project</span></li>
+    <li><span>Store new forms and fields into Impowr database. By default, all
+        forms and fields are required.</span></li>
+    <li><span>Export all data from source project</span></li>
+    <li><span>Empty out skip forms and blank fields that defined on Impowr
+        database from the exported data</span></li>
+    <li><span>Save the updated data into the destination project</span></li>
+    <li><span>Logged process info on Impowr database</span></li>
+    <li><span>The script also pull source project dictionaires (forms based) and
+        save them on our database.
+      </span></li>
+    <li><span>Since the record id is the key for each data row, we prefix it
+        with the source project id, for example, if the source project id is
+        '123' and the record id is '1', the record id will be '123_1' in
+        destination project</span></li>
+    <li><span>If any skip forms or blank fields need, you can update them on the
+        Form and Field Control tables</span></li>
+  </ol>
+
+  <h4>Permission Controls</h4>
+  <ol>
+    <li><span>Roles: Super Admin, Job admin, Team admin, and Team users</span></li>
+    <li>
+      <span>Super Admin
+        <ul>
+          <li><span>Add/Edit jobs, teams, and team users</span></li>
+          <li><span>Edit forms and fields on all jobs</span></li>
+          <li><span>Pull data for all jobs</span></li>
+        </ul>
+      </span>
+    </li>
+    <li>
+      <span>Job Admin
+        <ul>
+          <li><span>Add/Edit jobs</span></li>
+          <li><span>Edit forms and fields on his(her) jobs</span></li>
+          <li><span>Pull data for his(her) jobs</span></li>
+        </ul>
+      </span>
+    </li>
+    <li>
+      <span>Team Admin
+        <ul>
+          <li><span>Add/Edit/Delete his(her) team users</span></li>
+          <li><span>Edit forms and fields for his(her) teams's jobs</span></li>
+          <li><span>Pull data for his(her) teams's jobs</span></li>
+        </ul>
+      </span>
+    </li>
+    <li><span>Team Users - Editable
+        <ul>
+          <li><span>View his(her) team jobs</span></li>
+          <li><span>View his(her) team users</span></li>
+          <li><span>Edit forms and fields for his(her) teams's jobs</span></li>
+          <li><span>Pull data for his(her) teams's jobs</span></li>
+        </ul>
+      </span></li>
+    <li><span>Team Users - Readonly
+        <ul>
+          <li><span>View his(her) team jobs</span></li>
+          <li><span>View his(her) team users</span></li>
+          <li><span>View forms and fields for his(her) teams's jobs</span></li>
+          <li><span>View his(her) teams's jobs Auditlogs</span></li>
+        </ul>
+      </span></li>
+  </ol>
+</div>
+
+<div class="about_diagram">
+  <h4>Diagram</h4>
+  <img src="images/diagram.png" alt="Diagram Image" />
+</div>

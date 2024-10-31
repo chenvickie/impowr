@@ -1,0 +1,53 @@
+# .github/workflows/deploy.yml
+
+name: Build and Deploy Impowr Ember App
+
+on:
+  push:
+    branches:
+      - main # or the branch you want to deploy from
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Ember app
+        run: npm run build:production
+      # - name: Deploy to Server
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      #   run: |
+      #     npm run deploy
+
+      - name: Deploy to VM using Rsync Deployments action
+        uses: Burnett01/rsync-deployments@5.2.1
+        with:
+          switches: -avz --delete
+          remote_path: ${{ secrets.DEST_PATH }}
+          remote_host: ${{ secrets.VM_HOST }}
+          remote_user: ${{ secrets.VM_SSH_USER }}
+          path: dist/
+          remote_key: ${{ secrets.PROD_VM_SSH_PRIVATE_KEY }}
+
+      - name: Cleanup build files
+        run: rm -rf dist/

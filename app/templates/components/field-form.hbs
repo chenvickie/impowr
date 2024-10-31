@@ -1,0 +1,81 @@
+<div class="container field-form">
+  <form id="form-form" {{action "saveField" true on="submit"}}>
+    {{#if changeset.errors}}
+      <div class="errorFields col-xs-10">
+        <ul>
+          {{#each changeset.errors as |errorSet|}}
+            {{#each errorSet.validation as |error|}}
+              <li>{{error}}</li>
+            {{/each}}
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+    <br />
+
+    <div class="form-group">
+      <label for="job_id" class="required">Job ID</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="job_id"
+            class="form-control"
+            @value={{data.job_id}}
+            readonly="true"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="field_name" class="required">Field Name</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="field_name"
+            class="form-control"
+            @value={{data.field_name}}
+            readonly="true"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="show_blank" class="required">Show Blank?</label>
+      <div class="row">
+        <div class="col-xs-1" style="margin-left:-28px">
+          <Input
+            id="show_blank"
+            @type="checkbox"
+            @checked={{data.show_blank}}
+            @disabled={{checkboxReadonly}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="date_activated" class="required">Activate Date</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <PikadayInput
+            class="form-control"
+            @value={{data.date_activated}}
+            @format={{"YYYY-MM-DD"}}
+            placeholder="Select Start Date"
+            @onSelection={{fn (mut data.date_activated)}}
+          />
+          <small class="form-text text-muted">*YYYY-MM-DD</small>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button
+      class="btn btn-primary"
+      onclick={{action "closeModal"}}
+    >Cancel</button>
+  </form>
+</div>

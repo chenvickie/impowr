@@ -1,0 +1,21 @@
+<div class="multi-checkbox">
+  {{#each items as |option|}}
+    <label class="multi-checkbox-label">
+      <input
+        type="checkbox"
+        value={{option}}
+        checked={{option.checked}}
+        {{action "toggleOption" option on="change"}}
+      />
+      {{#if option.id}}
+        [ID:{{option.id}}]
+      {{/if}}
+
+      {{#if key}}
+        {{get option key}}
+      {{else}}
+        {{option}}
+      {{/if}}
+    </label>
+  {{/each}}
+</div>

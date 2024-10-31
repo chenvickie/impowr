@@ -1,0 +1,74 @@
+<div class="container team-user-form">
+  <form id="team-user-form" {{action "updateTeamUser" false on="submit"}}>
+    {{#if changeset.errors}}
+      <div class="errorFields col-xs-10">
+        <ul>
+          {{#each changeset.errors as |errorSet|}}
+            {{#each errorSet.validation as |error|}}
+              <li>{{error}}</li>
+            {{/each}}
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+    <br />
+
+    {{#if isEdit}}
+      <div class="form-group">
+        <label for="team_id" class="required">Team ID</label>
+        <div class="row">
+          <div class="col-xs-12">
+            <Input
+              id="team_id"
+              class="form-control"
+              @value={{data.team_id}}
+              readonly="true"
+            />
+          </div>
+        </div>
+      </div>
+    {{/if}}
+
+    <div class="form-group">
+      <label for="user_name" class="required">User Orcid ID</label>
+      <div class="row">
+        <div class="col-xs-12">
+          <Input
+            id="user_name"
+            class="form-control"
+            @value={{data.user_name}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="is_editable" class="required">Allow Edit</label>
+      <div class="row">
+        <div class="col-xs-1" style="margin-left:-20px">
+          <Input
+            id="is_editable"
+            @type="checkbox"
+            @checked={{data.is_editable}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="is_admin" class="required">Is Admin</label>
+      <div class="row">
+        <div class="col-xs-1" style="margin-left:-20px">
+          <Input id="is_admin" @type="checkbox" @checked={{data.is_admin}} />
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <button
+      class="btn btn-primary"
+      onclick={{action "closeModal"}}
+    >Cancel</button>
+  </form>
+</div>

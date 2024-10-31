@@ -1,0 +1,38 @@
+<div class="form_controls_table">
+  {{forms-table
+    reloadTable=reloadTable
+    searchInput=model.searchValue
+    data=forms
+    totalPages=totalPages
+    pageLength=pageLength
+    allowPull=allowPull
+    onPull=(action "showPullModel")
+    onEdit=(action "editRecord")
+  }}
+</div>
+
+{{#if isShowingModal}}
+  {{#modal-dialog targetAttachment="center" translucentOverlay=true}}
+    {{model-dialog-title title="Form Editor" onClose=(action "closeModal")}}
+    {{form-form isEdit=true data=editData onClose=(action "closeModal")}}
+  {{/modal-dialog}}
+{{/if}}
+
+{{#if isShowingPullConfirm}}
+  {{#modal-dialog targetAttachment="center" translucentOverlay=true}}
+    <div class="pull-confirm-form">
+      {{model-dialog-title
+        title="Sync up forms from destination site"
+        onClose=(action "closePullConfirmDialog")
+      }}
+      {{job-list
+        availableJobs=model.jobs
+        onUpdateSelectedJob=(action "updateSelectedJob")
+      }}
+      {{model-dialog-footer
+        onSubmit=(action "pullForms")
+        onCancel=(action "closePullConfirmDialog")
+      }}
+    </div>
+  {{/modal-dialog}}
+{{/if}}

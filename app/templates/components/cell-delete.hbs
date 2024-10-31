@@ -1,0 +1,6 @@
+{{#if show}}
+  {{fa-icon
+    "trash"
+    click=(action tableActions.onCustomAction column.actionName row)
+  }}
+{{/if}}

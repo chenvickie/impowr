@@ -1,0 +1,9 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/app/logs
+/app/config/config.php
+/app/config/config-prod.php
+/app/data/db-prod.sql
+/app/documents
+/app/etl/logs

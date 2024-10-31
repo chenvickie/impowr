@@ -1,0 +1,21 @@
+<div>
+  <div class="app-header">
+    {{header logout=(action "logout")}}
+  </div>
+  <div class="app-container container">
+    {{#if isAuthenticated}}
+      {{outlet}}
+    {{else}}
+      <div class="centered">
+        <button class="btn btn-primary" {{action "login"}}>Login with ORCID</button>
+      </div>
+    {{/if}}
+
+    {{!-- {{#if currentlyLoading}}
+      <div class="currentlyLoading">
+        Loading…
+      </div>
+    {{/if}} --}}
+  </div>
+  <div class="overlay"></div>
+</div>

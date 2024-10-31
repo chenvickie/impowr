@@ -1,0 +1,110 @@
+<div class="container form-form">
+  <form id="form-form" {{action "saveForm" true on="submit"}}>
+    {{#if changeset.errors}}
+      <div class="errorFields col-xs-10">
+        <ul>
+          {{#each changeset.errors as |errorSet|}}
+            {{#each errorSet.validation as |error|}}
+              <li>{{error}}</li>
+            {{/each}}
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+    <br />
+
+    <div class="form-group">
+      <label for="job_id" class="required">Job ID</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="job_id"
+            class="form-control"
+            @value={{data.job_id}}
+            readonly="true"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="id" class="required">Form ID</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="id"
+            class="form-control"
+            @value={{data.id}}
+            readonly="true"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="form_name" class="required">Form Name</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="form_name"
+            class="form-control"
+            @value={{data.form_name}}
+            readonly="true"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="import_need" class="required">Import Need?</label>
+      <div class="row">
+        <div class="col-xs-1" style="margin-left:-28px">
+          <Input
+            id="import_need"
+            @type="checkbox"
+            @checked={{data.import_need}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="date_activated" class="required">Activate Date</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <PikadayInput
+            class="form-control"
+            @value={{data.date_activated}}
+            @format={{"YYYY-MM-DD"}}
+            placeholder="Select Start Date"
+            @onSelection={{fn (mut data.date_activated)}}
+          />
+          <small class="form-text text-muted">*YYYY-MM-DD</small>
+        </div>
+      </div>
+    </div>
+
+    {{!-- <div class="form-group">
+      <label for="date_deactivated">Deactivate Date</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <PikadayInput
+            class="form-control"
+            @value={{data.date_deactivated}}
+            @format={{"MM-DD-YYYY"}}
+            placeholder="Select Deactivate Date"
+            @onSelection={{fn (mut data.date_deactivated)}}
+          />
+          <small class="form-text text-muted">*MM-DD-YYYY</small>
+        </div>
+      </div>
+    </div> --}}
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button
+      class="btn btn-primary"
+      onclick={{action "closeModal"}}
+    >Cancel</button>
+  </form>
+</div>

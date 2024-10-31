@@ -1,0 +1,23 @@
+<div class="row">
+  <p>Please select target Job</p>
+  {{#power-select
+    options=availableJobs
+    selected=selectedJob
+    optionValuePath="valuePath"
+    optionsLabelPath="project_name"
+    searchField="project_name"
+    renderInPlace=true
+    triggerClass="text-left"
+    onChange=(action
+      (pipe (action (mut selectedJob)) (action "updateSelectedJob" selectedJob))
+    )
+    as |option|
+  }}
+    ( JOB
+    {{option.id}}
+    )
+    {{option.project_id}}
+    -
+    {{option.job_name}}
+  {{/power-select}}
+</div>

@@ -1,0 +1,30 @@
+<div class="audit_logs">
+  {{audit-logs-table
+    reloadTable=reloadTable
+    searchInput=model.searchValue
+    data=auditLogs
+    totalPages=totalPages
+    pageLength=pageLength
+    allowPull=allowPull
+    onPull=(action "showPullModel")
+  }}
+</div>
+
+{{#if isShowingPullConfirm}}
+  {{#modal-dialog targetAttachment="center" translucentOverlay=true}}
+    <div class="pull-confirm-form">
+      {{model-dialog-title
+        title="Data Transfer"
+        onClose=(action "closePullConfirmDialog")
+      }}
+      {{job-list
+        availableJobs=model.jobs
+        onUpdateSelectedJob=(action "updateSelectedJob")
+      }}
+      {{model-dialog-footer
+        onSubmit=(action "dataTransfer")
+        onCancel=(action "closePullConfirmDialog")
+      }}
+    </div>
+  {{/modal-dialog}}
+{{/if}}

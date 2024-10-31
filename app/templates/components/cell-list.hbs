@@ -1,0 +1,17 @@
+{{#if list}}
+  <ul class="cell-list-ul">
+    {{#each list as |option|}}
+      <li>
+        {{#if option.id}}
+          [ID:{{option.id}}]
+        {{/if}}
+
+        {{#if key}}
+          {{get option key}}
+        {{else}}
+          {{option}}
+        {{/if}}
+      </li>
+    {{/each}}
+  </ul>
+{{/if}}

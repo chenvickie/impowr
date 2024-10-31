@@ -1,0 +1,19 @@
+<div class="users_table">
+  {{teams-table
+    reloadTable=reloadTable
+    searchInput=model.searchValue
+    data=teams
+    totalPages=totalPages
+    pageLength=pageLength
+    allowAdd=allowAdd
+    onAdd=(action "addRecord")
+    onEdit=(action "editRecord")
+  }}
+</div>
+
+{{#if isShowingModal}}
+  {{#modal-dialog targetAttachment="center" translucentOverlay=true}}
+    {{model-dialog-title title="Team Editor" onClose=(action "closeModal")}}
+    {{team-form isEdit=isEdit data=editData onClose=(action "closeModal")}}
+  {{/modal-dialog}}
+{{/if}}

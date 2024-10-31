@@ -1,0 +1,67 @@
+<div class="job-search-filter">
+  {{#if jobOptions}}
+    {{#power-select
+      options=jobOptions
+      selected=selectedJob
+      searchEnabled=false
+      onChange=(action
+        (pipe (action (mut selectedJob)) (action "onSearchClick"))
+      )
+      as |job|
+    }}
+      ( JOB
+      {{job.id}}
+      )
+      {{#if job.project_id}}
+        {{job.project_id}}
+        -
+      {{/if}}
+      {{job.job_name}}
+    {{/power-select}}
+  {{/if}}
+</div>
+
+<div class={{searchFieldClass}}>
+  {{#power-select
+    options=possibleFilters
+    selected=selectedFilter
+    optionValuePath="valuePath"
+    optionsLabelPath="label"
+    searchField="label"
+    renderInPlace=true
+    triggerClass="text-left"
+    onChange=(action
+      (pipe (action (mut selectedFilter)) (action "onSearchChange"))
+    )
+    as |option|
+  }}
+    {{#if option.label}}
+      {{option.label}}
+    {{else}}
+      {{option}}
+    {{/if}}
+  {{/power-select}}
+
+  {{#if searchByKeyup}}
+    {{input
+      type="search"
+      class="search-input"
+      value=searchInput
+      key-up=(action "onSearchInputChange")
+    }}
+  {{else}}
+    {{input type="search" class="search-input" value=searchInput}}
+  {{/if}}
+  <button
+    class="btn btn-primary search-button"
+    {{action "onSearchClick"}}
+  >Search</button>
+
+  {{#if showCustomButton}}
+    <button
+      class="btn btn-primary search-add-button"
+      {{action "onCustomButtonClick"}}
+    >{{customButton}}</button>
+  {{/if}}
+
+</div>

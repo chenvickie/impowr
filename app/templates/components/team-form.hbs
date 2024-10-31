@@ -1,0 +1,81 @@
+<div class="container team-form">
+  <form id="team-form" {{action "saveTeam" true on="submit"}}>
+    {{#if changeset.errors}}
+      <div class="errorFields col-xs-10">
+        <ul>
+          {{#each changeset.errors as |errorSet|}}
+            {{#each errorSet.validation as |error|}}
+              <li>{{error}}</li>
+            {{/each}}
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+    <br />
+
+    {{#if isEdit}}
+      <div class="form-group">
+        <label for="id" class="required">Team ID</label>
+        <div class="row">
+          <div class="col-xs-12">
+            <Input
+              id="id"
+              class="form-control"
+              @value={{data.id}}
+              readonly="true"
+            />
+          </div>
+        </div>
+      </div>
+    {{/if}}
+
+    <div class="form-group">
+      <label for="team_name" class="required">Team Name</label>
+      <div class="row">
+        <div class="col-xs-12">
+          <Input
+            id="team_name"
+            class="form-control"
+            @value={{data.team_name}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description" class="required">Description</label>
+      <div class="row">
+        <div class="col-xs-12">
+          <Input
+            id="description"
+            class="form-control"
+            @value={{data.description}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_names" class="required">Team Users
+      </label>
+      <div class="row">
+        <div class="col-xs-12">
+          {{team-users-table
+            reloadTable=reloadTable
+            data=data.team_users
+            totalPages=totalPages
+            pageLength=pageLength
+            teamData=data
+          }}
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button
+      class="btn btn-primary"
+      onclick={{action "closeModal"}}
+    >Cancel</button>
+  </form>
+</div>

@@ -1,0 +1,69 @@
+<div class="dt-bootstrap table-wrapper team-user-table">
+  <div class="row {{panelClasses}}">
+    <button
+      type="button"
+      class="btn btn-primary btn-add-team-user"
+      onclick={{action "addTeamUser"}}
+    >Add New User</button>
+    <div class="col-sm-12 light-table-content">
+      {{#light-table
+        table
+        responsive=true
+        onAfterResponsiveChange=(action "onAfterResponsiveChange")
+        tableActions=(hash onCustomAction=(action "onCustomAction"))
+        as |t|
+      }}
+
+        {{t.head
+          onColumnClick=(action "onColumnClick")
+          iconSortable="fa fa-sort"
+          iconAscending="fa fa-sort-asc"
+          iconDescending="fa fa-sort-desc"
+          fixed=true
+        }}
+
+        {{#t.body
+          canSelect=false
+          expandOnClick=false
+          onScrolledToBottom=(action "onScrolledToBottom")
+          as |body|
+        }}
+          {{#body.expanded-row as |row|}}
+            {{responsive-expanded-row
+              table=table
+              row=row
+              tableActions=(hash onCustomAction=(action "onCustomAction"))
+            }}
+          {{/body.expanded-row}}
+
+          {{#if isLoading}}
+            {{#body.loader}}
+              {{table-loader}}
+            {{/body.loader}}
+          {{/if}}
+
+          {{#if (and (not isLoading) table.isEmpty)}}
+            {{#body.no-data}}
+              No Data Found
+            {{/body.no-data}}
+          {{/if}}
+        {{/t.body}}
+      {{/light-table}}
+    </div>
+  </div>
+</div>
+
+{{#if isShowingTeamUserModal}}
+  {{#modal-dialog targetAttachment="center" translucentOverlay=true}}
+    {{model-dialog-title
+      title="Team User Editor"
+      onClose=(action "closeModal")
+    }}
+    {{user-form
+      isEdit=isEdit
+      data=editData
+      onClose=(action "closeModal")
+      onSave=(action "updateTeamUser")
+    }}
+  {{/modal-dialog}}
+{{/if}}

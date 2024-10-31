@@ -1,0 +1,100 @@
+<div class="dt-bootstrap table-wrapper">
+  <div class="row {{panelClasses}}">
+    <div class={{panelFilterClasses}}>
+      {{search-field
+        filterClassNames=filterClassNames
+        filterComponent=filterComponent
+        possibleFilters=possibleFilters
+        selectedFilter=selectedFilter
+        onSearchChange=(action "onSearchChange")
+        onSearchInputChange=(action "onSearchInputChange")
+        onSearchClick=(action "onSearchClick")
+        searchInput=searchInput
+        searchFieldClass=searchFieldClass
+        showCustomButton=allowAdd
+        customButton="Add Job"
+        onCustomButtonClick=(action "addRecord")
+      }}
+    </div>
+
+    {{#unless paginationOnFooter}}
+      {{#if paging}}
+        <div class={{paginationClass}}>
+          {{table-pagination
+            paginationClass=paginationClass
+            page=page
+            totalPages=totalPages
+            tableStatus=tableStatus
+            setPage=(action "setPage")
+          }}
+        </div>
+      {{/if}}
+    {{/unless}}
+
+    <div class="col-sm-12 light-table-content">
+      {{#light-table
+        table
+        height="65vh"
+        responsive=true
+        onAfterResponsiveChange=(action "onAfterResponsiveChange")
+        tableActions=(hash onCustomAction=(action "onCustomAction"))
+        as |t|
+      }}
+
+        {{t.head
+          onColumnClick=(action "onColumnClick")
+          iconSortable="fa fa-sort"
+          iconAscending="fa fa-sort-asc"
+          iconDescending="fa fa-sort-desc"
+          fixed=true
+        }}
+
+        {{#t.body
+          canSelect=false
+          expandOnClick=false
+          onScrolledToBottom=(action "onScrolledToBottom")
+          as |body|
+        }}
+          {{#body.expanded-row as |row|}}
+            {{responsive-expanded-row
+              table=table
+              row=row
+              tableActions=(hash onCustomAction=(action "onCustomAction"))
+            }}
+          {{/body.expanded-row}}
+
+          {{#if isLoading}}
+            {{#body.loader}}
+              {{table-loader}}
+            {{/body.loader}}
+          {{/if}}
+
+          {{#if (and (not isLoading) table.isEmpty)}}
+            {{#body.no-data}}
+              No Data Found
+            {{/body.no-data}}
+          {{/if}}
+        {{/t.body}}
+
+        {{#if paginationOnFooter}}
+          {{#if paging}}
+            {{#t.foot fixed=true as |columns|}}
+              <tr>
+                <td colspan={{columns.length}}>
+                  {{table-pagination
+                    paginationClass=paginationClass
+                    page=page
+                    totalPages=totalPages
+                    tableStatus=tableStatus
+                    paginationOnFooter=paginationOnFooter
+                    setPage=(action "setPage")
+                  }}
+                </td>
+              </tr>
+            {{/t.foot}}
+          {{/if}}
+        {{/if}}
+      {{/light-table}}
+    </div>
+  </div>
+</div>

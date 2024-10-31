@@ -1,0 +1,350 @@
+<div class="container job-form">
+  <form id="job-form">
+    {{#if changeset.errors}}
+      <div class="errorFields col-xs-10">
+        <ul>
+          {{#each changeset.errors as |errorSet|}}
+            {{#each errorSet.validation as |error|}}
+              <li>{{error}}</li>
+            {{/each}}
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+    <br />
+
+    <div class="form-group">
+      <label for="job" class="required">Job Name</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input id="job" class="form-control" @value={{data.job_name}} />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="source_institution" class="required">Source Institution</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="source_institution"
+            class="form-control"
+            @value={{data.source_institution}}
+          />
+        </div>
+      </div>
+    </div>
+
+    {{#if showProjectInfo}}
+      <div class="form-group">
+        <label for="source_project_name" class="required">Source Project Name</label>
+        <div class="row">
+          <div class="col-xs-11">
+            <Input
+              id="source_project_name"
+              class="form-control"
+              @value={{data.source_project_name}}
+              readonly="true"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="source_project_id" class="required">Source Project ID</label>
+        <div class="row">
+          <div class="col-xs-11">
+            <Input
+              id="source_project_id"
+              class="form-control"
+              @value={{data.source_project_id}}
+              readonly="true"
+            />
+          </div>
+        </div>
+      </div>
+    {{/if}}
+
+    <div class="form-group">
+      <label for="source_project_url" class="required">Source Project API</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="source_project_url"
+            class="form-control"
+            @value={{data.source_project_url}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="source_project_token" class="required">Source Project Token</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="source_project_token"
+            class="form-control"
+            @value={{data.source_project_token}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="source_contact_name" class="required">Source Project Contact</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="source_contact_name"
+            class="form-control"
+            @value={{data.source_contact_name}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="source_contact_email" class="required">Source Project Email</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="source_contact_email"
+            class="form-control"
+            @value={{data.source_contact_email}}
+            aria-label="Email address"
+            placeholder="Email address"
+          />
+          <small id="notifyToHelp" class="form-text text-muted">*Use comma for
+            more than one email address. Such as
+            abc@wakehealth.edu,ddd@wakhealth.edu</small>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    {{#if showProjectInfo}}
+      <div class="form-group">
+        <label for="project_name" class="required">Destination/Wake Project Name</label>
+        <div class="row">
+          <div class="col-xs-11">
+            <Input
+              id="project_name"
+              class="form-control"
+              @value={{data.project_name}}
+              readonly="true"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="project_id" class="required">Destination Project ID</label>
+        <div class="row">
+          <div class="col-xs-11">
+            <Input
+              id="project_id"
+              class="form-control"
+              @value={{data.project_id}}
+              readonly="true"
+            />
+          </div>
+        </div>
+      </div>
+    {{/if}}
+
+    <div class="form-group">
+      <label for="project_url" class="required">Destination Project API</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="project_url"
+            class="form-control"
+            @value={{data.project_url}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="project_token" class="required">Destination Project Token</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="project_token"
+            class="form-control"
+            @value={{data.project_token}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="project_contact_name" class="required">Destination Project
+        Contact</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="project_contact_name"
+            class="form-control"
+            @value={{data.project_contact_name}}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="project_contact_email" class="required">Destination Project
+        Email</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input
+            id="project_contact_email"
+            class="form-control"
+            @value={{data.project_contact_email}}
+            aria-label="Email address"
+            placeholder="Email address"
+          />
+          <small id="notifyToHelp" class="form-text text-muted">*Use comma for
+            more than one email address. Such as
+            abc@wakehealth.edu,ddd@wakhealth.edu</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="transfer_frequency" class="required">Transfer Frequency</label>
+      <div class="row">
+        <div class="col-xs-11 transfer_frequency_radio_buttons">
+          {{radio-button value="none" checked=data.transfer_frequency}}
+          None
+          {{radio-button value="daily" checked=data.transfer_frequency}}
+          daily
+          {{radio-button value="weekly" checked=data.transfer_frequency}}
+          weekly
+          {{#if (eq data.transfer_frequency "weekly")}}
+            {{#power-select
+              class="form-control scheduled_on"
+              options=availableWeekDays
+              selected=selectedWeekDay
+              renderInPlace=true
+              triggerClass="text-left"
+              onChange=(action
+                (pipe
+                  (action (mut selectedWeekDay))
+                  (action "onScheduledOnChange" selectedMonthDate)
+                )
+              )
+              as |option|
+            }}
+              {{option}}
+            {{/power-select}}
+          {{/if}}
+          {{radio-button value="monthly" checked=data.transfer_frequency}}
+          monthly
+
+          {{#if (eq data.transfer_frequency "monthly")}}
+            {{#power-select
+              class="form-control scheduled_on"
+              options=availableMonthDates
+              selected=selectedMonthDate
+              renderInPlace=true
+              triggerClass="text-left"
+              onChange=(action
+                (pipe
+                  (action (mut selectedMonthDate))
+                  (action "onScheduledOnChange" selectedMonthDate)
+                )
+              )
+              as |option|
+            }}
+              {{option}}
+
+              {{!-- {{#if (eq option "Last day")}}
+                <EmberTooltip
+                  @tooltipClass="end-of-month-tooltip"
+                  @text="Last day of each Month"
+                />
+              {{/if}} --}}
+            {{/power-select}}
+          {{/if}}
+          {{radio-button value="custom" checked=data.transfer_frequency}}
+          custom
+          {{#if (eq data.transfer_frequency "custom")}}
+            <PikadayInput
+              class="form-control scheduled_on"
+              @value={{data.scheduled_on}}
+              @format={{"YYYY-MM-DD"}}
+              placeholder="Schedule Date On"
+              @onSelection={{fn (mut data.scheduled_on)}}
+            />
+          {{/if}}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="date_activated" class="required">Activate Date</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <PikadayInput
+            class="form-control"
+            @value={{data.date_activated}}
+            @format={{"YYYY-MM-DD"}}
+            placeholder="Select Start Date"
+            @onSelection={{fn (mut data.date_activated)}}
+          />
+          <small class="form-text text-muted">*YYYY-MM-DD</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="date_deactivated">Deactivate Date</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <PikadayInput
+            class="form-control"
+            @value={{data.date_deactivated}}
+            @format={{"MM-DD-YYYY"}}
+            placeholder="Select Deactivate Date"
+            @onSelection={{fn (mut data.date_deactivated)}}
+          />
+          <small class="form-text text-muted">*MM-DD-YYYY</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="job_teams">Teams
+      </label>
+      <div class="row">
+        <div class="col-xs-12">
+          <MultipleChoicePicker @items={{availableTeams}} @key="team_name" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="note">Note</label>
+      <div class="row">
+        <div class="col-xs-11">
+          <Input id="note" class="form-control" @value={{data.note}} />
+        </div>
+      </div>
+    </div>
+
+    {{#if isConnected}}
+      <button class="btn btn-primary" {{action "saveJob"}}>Submit</button>
+    {{else}}
+      <button class="btn btn-primary" {{action "testConnections"}}>Test
+        Connections</button>
+    {{/if}}
+    <button
+      class="btn btn-primary"
+      onclick={{action "closeModal"}}
+    >Cancel</button>
+  </form>
+</div>

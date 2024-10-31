@@ -1,0 +1,29 @@
+<div class={{paginationClass}}>
+  <ul class="pagination vertical-align pagination-sm">
+    <li class={{if (eq page 1) "disabled"}}>
+      <a {{action "updatePageBegin" (dec page)}} href="#" aria-label="Previous">
+        <span aria-hidden="true">Pre</span>
+      </a>
+    </li>
+    {{#if (lte totalPages 1)}}
+      <li class="active">
+        <a href="#">1</a>
+      </li>
+    {{else}}
+      {{#each (range begin end true) as |p|}}
+        {{#if (eq p 0)}}
+          {{! skip page 0 }}
+        {{else}}
+          <li class={{if (eq p page) "active"}}>
+            <a href="#" {{action "sendSetPage" p}}>{{p}}</a>
+          </li>
+        {{/if}}
+      {{/each}}
+    {{/if}}
+    <li class={{if (eq page totalPages) "disabled"}}>
+      <a href="#" {{action "updatePageEnd" (inc page)}} aria-label="Next">
+        <span aria-hidden="true">Next</span>
+      </a>
+    </li>
+  </ul>
+</div>

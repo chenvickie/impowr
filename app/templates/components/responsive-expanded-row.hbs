@@ -1,0 +1,18 @@
+<div class="row">
+  <dl class="dl-horizontal">
+    {{#each table.responsiveHiddenColumns as |column|}}
+      <dt>{{column.label}}:</dt>
+      {{#if column.cellComponent}}
+        <dd>
+          {{component
+            column.cellComponent
+            value=(get row column.valuePath)
+            column=column
+          }}
+        </dd>
+      {{else}}
+        <dd>{{get row column.valuePath}}</dd>
+      {{/if}}
+    {{/each}}
+  </dl>
+</div>

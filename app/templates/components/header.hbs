@@ -1,0 +1,153 @@
+<div class="main-header container-fluid">
+  <div class="row other-jobs container">
+    <div class="col-sm-1 hideInSmall" />
+    <div class="col-sm-10 biggerInSmall">
+      <Wake-header />
+    </div>
+    <div class="col-sm-1 hideInSmall" />
+  </div>
+
+  <div class="row utility-navs container">
+    <div class="col-sm-1" />
+    <div class="col-sm-10">
+      <div class="logo col-xs-4 col-lg-4">
+        <a href="https://www.wakehealth.edu/" target=""><img
+            src={{logoImg}}
+            alt="Logo"
+          /></a>
+      </div>
+      <div class="col-xs-2 col-lg-2">
+      </div>
+      <div class="header_msg col-xs-6 col-lg-6">
+        <p>{{greeting}}
+          {{#if showLogout}}
+            <input type="button" {{action "logout"}} value="Logout" />
+          {{/if}}
+          {{#if canSimulate}}
+            {{#if isSimulated}}
+              <input
+                type="button"
+                {{action "onExitSimulate"}}
+                value="Exit Simulate"
+              />
+            {{else}}
+              <input
+                type="button"
+                {{action "showSimulateModal"}}
+                value="Simulate"
+              />
+            {{/if}}
+          {{/if}}
+        </p>
+      </div>
+    </div>
+    <div class="col-sm-1" />
+  </div>
+  <div class="row nav-tabs container">
+    <div class="col-sm-1" />
+    <div class="col-sm-10">
+      <BsNavbar as |navbar|>
+        <div class="search-tabs1">
+          {{navbar.toggle}}
+          <navbar.content>
+            <navbar.nav as |nav|>
+              <nav.item>
+                <nav.linkTo @route="index">Home</nav.linkTo>
+              </nav.item>
+              <nav.item>
+                <nav.linkTo @route="admin-jobs">Jobs</nav.linkTo>
+              </nav.item>
+              <nav.item>
+                <nav.linkTo @route="admin-forms">Form Controls</nav.linkTo>
+              </nav.item>
+              <nav.item>
+                <nav.linkTo @route="admin-fields">Field Controls</nav.linkTo>
+              </nav.item>
+              <nav.item>
+                <nav.linkTo @route="audit-logs">Audit Logs</nav.linkTo>
+              </nav.item>
+              <nav.item>
+                <nav.linkTo @route="admin-control">Teams</nav.linkTo>
+              </nav.item>
+              <nav.item>
+                <nav.linkTo @route="about">About</nav.linkTo>
+              </nav.item>
+            </navbar.nav>
+          </navbar.content>
+        </div>
+      </BsNavbar>
+    </div>
+    <div class="col-sm-1" />
+  </div>
+</div>
+
+<div class="mobile-header container-fluid">
+  <div class="mobile-nav-tabs container">
+    <BsNavbar as |navbar|>
+      <div class="mobile-menu-tabs">
+        {{navbar.toggle}}
+        <navbar.content>
+          <navbar.nav as |nav|>
+            <nav.item>
+              <nav.linkTo @route="index">Home</nav.linkTo>
+            </nav.item>
+            <nav.item>
+              <nav.linkTo @route="admin-jobs">Job Jobs</nav.linkTo>
+            </nav.item>
+            <nav.item>
+              <nav.linkTo @route="admin-forms">Form Controls</nav.linkTo>
+            </nav.item>
+            <nav.item>
+              <nav.linkTo @route="admin-fields">Field Controls</nav.linkTo>
+            </nav.item>
+            <nav.item>
+              <nav.linkTo @route="audit-logs">Audit Logs</nav.linkTo>
+            </nav.item>
+            <nav.item>
+              <nav.linkTo @route="about">About</nav.linkTo>
+            </nav.item>
+            <hr />
+            <Wake-header />
+          </navbar.nav>
+        </navbar.content>
+      </div>
+      <div class="mobile-logo">
+        <a href="https://www.wakehealth.edu/" target=""><img
+            src={{logoImg}}
+            alt="Logo"
+          /></a>
+      </div>
+    </BsNavbar>
+  </div>
+
+  <div class="header_msg">
+
+  </div>
+</div>
+
+{{#if isShowingSimulateModal}}
+  {{#modal-dialog targetAttachment="center" translucentOverlay=true}}
+    {{model-dialog-title title="User Simulate" onClose=(action "closeModal")}}
+    <div class="container">
+      <form id="simulate-user-form" {{action "onStartSimulate" on="submit"}}>
+        <div class="form-group">
+          <label for="simulateID" class="required">Simulate Orcid ID</label>
+          <div class="row">
+            <div class="col-xs-12">
+              <Input
+                id="simulateID"
+                class="form-control"
+                @value={{simulateID}}
+              />
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Simulate Now</button>
+        <button
+          class="btn btn-primary"
+          onclick={{action "closeModal"}}
+        >Cancel</button>
+      </form>
+    </div>
+  {{/modal-dialog}}
+{{/if}}
