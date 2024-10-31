@@ -1,6 +1,6 @@
 # RedCap Impowr data transfer
 
-The RedCap Impowr scripts pull together data from external Redcap surveys at different institutions into Wake Redcap instances
+The RedCap Impowr scripts pull together data from external Redcap surveys at different institutions to target Redcap instances
 
 ## Redcap
 
@@ -36,19 +36,19 @@ The RedCap Impowr scripts pull together data from external Redcap surveys at dif
 - Sync forms and fields controls in database
 
 ```bash
-${your_php_path}/php ${your_redcap_impowr_path}/impowr-api/etl/update.sh
+${your_php_path}/php ${your_redcap_impowr_api_path}/etl/update.sh
 ```
 
 - Transfer survey records based on forms and fields controls
 
 ```bash
-${your_php_path}/php ${your_redcap_impowr_path}/impowr-api/etl/import.sh
+${your_php_path}/php ${your_redcap_impowr_api_path}/etl/import.sh
 ```
 
 -- Sync forms and fields controls in database, and then Transfer survey records based on forms and fields controls
 
 ```bash
-${your_php_path}/php ${your_redcap_impowr_path}/impowr-api/etl/pull.sh
+${your_php_path}/php ${your_redcap_impowr_api_path}/etl/pull.sh
 ```
 
 ## Cron job
@@ -63,7 +63,7 @@ There are options we can pass on cron job
 - [-bfd]: (fields need to be blank in the import process, it should a comma-separated list, such as 'email, dob', etc)
 
 ```bash
-${your_redcap_impowr_path}/impowr-api/etl/pull.sh -e ${env} -s ${data_site} -sfm ${skip_forms} -bfd ${blank_fields}
+${your_redcap_impowr_api_path}/etl/pull.sh -e ${env} -s ${data_site} -sfm ${skip_forms} -bfd ${blank_fields}
 ```
 
 ## Logs

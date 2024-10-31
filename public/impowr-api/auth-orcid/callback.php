@@ -48,7 +48,7 @@ if ( isset ($data['access_token']) ) {
             'orcid'        => $data['orcid'],
             'name'         => $data['name'],
             'expire_on'    => isset ($res['session_expire_time']) ? $res['session_expire_time'] : "",
-            "is_admin"     => $user->info["super_admin"] == "YES" ? true : falsetes
+            "is_admin"     => $user->info["super_admin"] == "YES" ? true : false
         ];
 
         $user->updateLastLogin ();
