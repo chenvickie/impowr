@@ -585,7 +585,7 @@ export default AjaxService.extend({
           self.hideLoader();
           if (res && res.success) {
             self.toastr.success(res.message);
-            return true;
+            return res.info;
           } else {
             self.resetHeader();
             self.toastr.error("Error: " + res.message);
@@ -617,8 +617,7 @@ export default AjaxService.extend({
         .then(function (res) {
           self.hideLoader();
           if (res && res.success) {
-            self.toastr.success(res.message);
-            return true;
+            return res.info;
           } else {
             self.toastr.error("Error: " + res.message);
             return false;

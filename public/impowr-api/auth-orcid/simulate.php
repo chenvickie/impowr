@@ -6,7 +6,7 @@ include_once '../config/auth.php';
 if ( $loginUser->info != null ) {
     $msg = isset ($_POST["simulate"]) ? "Start Simulate!" : "Stop Simulate!";
     echo json_encode (
-        array( "message" => $msg, "expire_on" => null, "success" => true )
+        array( "message" => $msg, "expire_on" => null, "success" => true, "info" => $loginUser->info )
     );
 } else {
     echo json_encode (

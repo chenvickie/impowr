@@ -59,7 +59,7 @@ module.exports = function (environment) {
     ENV.APP.API = "/impowr-ui/impowr-api/";
     ENV.APP.redirectUri =
       "https://cde2omop.wakehealth.edu/impowr-ui/impowr-api/auth-orcid/callback.php";
-    //ENV.APP.disableRightClick = "return false";
+    ENV.APP.disableRightClick = "return false";
     console.log = function () {}; //dont show log in production
   }
 
