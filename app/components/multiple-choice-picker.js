@@ -1,7 +1,10 @@
 import Component from "@ember/component";
+import { computed } from "@ember/object";
 
 export default Component.extend({
-  items: [], // a list of available items
+  items: computed(function () {
+    return [];
+  }), // a list of available items
   key: null,
   actions: {
     toggleOption(option) {
