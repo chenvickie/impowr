@@ -41,6 +41,11 @@ export default Component.extend(FormCommon, {
     return dates;
   }),
   availableTeams: computed("teams", "data.job_teams", function () {
+    return this.get("teams") && this.get("teams").length > 0
+      ? this.getAvailableTeams()
+      : [];
+  }),
+  getAvailableTeams() {
     let teams = [];
     let selectedTeams = this.get("data.job_teams")
       ? this.get("data.job_teams")
@@ -54,7 +59,7 @@ export default Component.extend(FormCommon, {
       teams.push(team);
     });
     return teams;
-  }),
+  },
   onTransferFrequencyChanged: observer("data.transfer_frequency", function () {
     let scheduledOn =
       this.get("originalData.transfer_frequency") ==

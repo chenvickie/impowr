@@ -3,13 +3,12 @@ import { computed } from "@ember/object";
 
 export default Component.extend({
   key: computed("column", function () {
-    if (this.get("column.key")) {
-      return this.get("column.key");
-    }
-    return "name"; // use name by default
+    return this.get("column.key") ? this.get("column.key") : "name"; // use name by default
   }),
   list: computed("value", function () {
-    if (!this.get("value")) return [];
+    return !this.get("value") ? [] : this.getList();
+  }),
+  getList() {
     let items = this.get("value");
     if (typeof items == "string") {
       this.set("key", null);
@@ -17,5 +16,5 @@ export default Component.extend({
     } else {
       return items;
     }
-  }),
+  },
 });

@@ -20,6 +20,10 @@ module.exports = function (defaults) {
       only: ["inc", "dec", "pipe"],
       except: ["filter-by"],
     },
+    babel: {
+      // enable "loose" mode
+      loose: true,
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
