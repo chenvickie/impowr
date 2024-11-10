@@ -25,37 +25,41 @@ class Audits
             $query = "FROM impowr_audit_logs AS a
                       LEFT JOIN impowr_jobs AS i on a.job_id = i.id";
 
+            $hasWhere = false;
             if ( $this->loginUser["super_admin"] != "YES" ) {
                 $query .= " WHERE a.job_id IN (
-                SELECT job_id 
-                FROM [dbo].[impowr_team_jobs]
-                WHERE team_id IN (
-                    SELECT [team_id]
-                    FROM [dbo].[impowr_team_users] AS itu 
-                    LEFT JOIN [dbo].[impowr_teams] AS it ON itu.team_id = it.id
-                    WHERE user_name ='" . $this->loginUser['user_name'] . "'
-                )
-            )";
+                    SELECT job_id 
+                    FROM [dbo].[impowr_team_jobs]
+                    WHERE team_id IN (
+                        SELECT [team_id]
+                        FROM [dbo].[impowr_team_users] AS itu 
+                        LEFT JOIN [dbo].[impowr_teams] AS it ON itu.team_id = it.id
+                        WHERE user_name ='" . $this->loginUser['user_name'] . "'
+                    )
+                )";
+                $hasWhere = true;
             }
             $key  = in_array ($key, $ikeys) ? "i." . $key : "a." . $key;
             $sort = in_array ($sort, $ikeys) ? "i." . $sort : "a." . $sort;
 
             if ( $key !== '' && $value !== '' ) {
+                $query .= $hasWhere ? " AND " : " WHERE ";
                 if ( in_array ($key, $noQuote) ) {
-                    $query .= " AND " . $key . " = " . $value;
+                    $query .= $key . " = " . $value;
                 } else {
                     if ( $partial === 'YES' ) {
-                        $query .= " AND (" . $key . " = '" . $value . "' OR " . $key . " like '%" . $value . "' OR " . $key . " like '" . $value . "%' OR " . $key . " like '%" . $value . "%')";
+                        $query .= " (" . $key . " = '" . $value . "' OR " . $key . " like '%" . $value . "' OR " . $key . " like '" . $value . "%' OR " . $key . " like '%" . $value . "%')";
                     } else {
-                        $query .= " AND (" . $key . " = ''" . $value . ")";
+                        $query .= " (" . $key . " = ''" . $value . ")";
                     }
                 }
                 if ( $jobId != "all" && $jobId != "" ) {
-                    $query .= " AND a.job_id = " . $jobId;
+                    $query .= " a.job_id = " . $jobId;
                 }
 
             } else if ( $jobId != "all" && $jobId != "" ) {
-                $query .= " AND a.job_id = " . $jobId;
+                $query .= $hasWhere ? " AND " : " WHERE ";
+                $query .= " a.job_id = " . $jobId;
             }
 
             $totalQuery .= $query;
