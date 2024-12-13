@@ -7,12 +7,12 @@
 
 # variables defined
 env="dev"
-site="CCCRemoteA" # a string, need to be a key from endpoint list in config file
+site="TEST" # a site name you would like to import
 forms="" # override the forms from database if need, for example, "demographics"
-fields="" # overrid the fields from the database if need, for example, imp_bstrong_inter,impowr_ime2_inter,imp_bstrong_moud", etc
+fields="" # override the fields from the database if need, for example, imp_bstrong_inter,impowr_ime2_inter,imp_bstrong_moud", etc
 
 # we can pass those variables from crontab to run different sites in different scheduled time
-while getopts e:s:d: opts; do
+while getopts e:s:fm:fd opts; do
    case ${opts} in
       e) env=${OPTARG} ;;
       s) site=${OPTARG} ;;
@@ -20,6 +20,10 @@ while getopts e:s:d: opts; do
       fd) fields=${OPTARG} ;;
    esac
 done
+
+if [[ $path == "prod" ]]; then
+   cd /var/www/html/impowr/impowr-api/etl
+fi
 
 # import survey records from source site to destination site
 # IMPORTANT: we will need to make sure php path to be picked up in server or different devices
