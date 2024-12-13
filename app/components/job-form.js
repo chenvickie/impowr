@@ -97,8 +97,7 @@ export default Component.extend(FormCommon, {
       this.get("api")
         .testConnections(this.get("data"))
         .then(function (res) {
-          if (res && res.success) {
-            self.set("isConnected", true);
+          if (res && res.success == true) {
             if (res["sourceInfo"]) {
               self.set(
                 "data.source_project_name",
@@ -113,6 +112,7 @@ export default Component.extend(FormCommon, {
               self.set("data.project_name", res["destInfo"]["project_title"]);
               self.set("data.project_id", res["destInfo"]["project_id"]);
             }
+            self.set("isConnected", true);
           } else {
             self.set("isConnected", false);
           }
